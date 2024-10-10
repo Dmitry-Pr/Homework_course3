@@ -1,4 +1,4 @@
-# Practice 5 по базам данных
+![image](https://github.com/user-attachments/assets/75d06d83-b38c-44c6-963c-2dd42ce818a3)# Practice 5 по базам данных
 
 ## Работу выполнил
 
@@ -7,7 +7,7 @@
 
 Для работы поднял образ mssql в докере и запросы писал в PyCharm (там же подключился к бд)
 
-### Task 1
+## Task 1
 
 Создаем бд и таблицу файлом `create_task1.sql`
 
@@ -145,7 +145,7 @@ SELECT * FROM HR.Employees WHERE empid >= 3 AND empid <= 7 AND empid <> 5;
 
 Для этих двух зарпосов результат будет одинаковым
 
-### Task 2
+## Task 2
 
 #### -- 1. Из базы данных TSQL 2012 из таблицы [Production].[Suppliers]
 
@@ -304,3 +304,95 @@ SELECT * FROM HR.Employees WHERE YEAR(birthdate) = 1970 OR YEAR(birthdate) = 197
 ![image](https://github.com/user-attachments/assets/aea5cde9-7a6a-4ab4-8c05-5a70d750519e)
 
 Эти два запроса дают одинаковый результат
+
+## 5_SELECT
+
+--SELECT с различной логикой запроса
+
+#### --Выбрать из таблицы hr.employees информацию о сотруднике с empid = 4
+
+SELECT * FROM HR.Employees WHERE empid = 4
+
+![image](https://github.com/user-attachments/assets/ad34778f-eeb5-4732-aeb4-46444e45ae68)
+
+Тут все просто
+
+#### --Выбрать из таблицы hr.employees информацию о сотруднике с empid = 3 и о сотруднике с empid = 8
+
+SELECT * FROM HR.Employees WHERE empid in (3, 8)
+
+SELECT * FROM HR.Employees WHERE empid = 3 OR empid = 8
+
+![image](https://github.com/user-attachments/assets/1b684eb0-fa9a-4b3b-bf4a-5599849a0dd7)
+
+Эти два запроса дают одинаковый результат
+
+#### --Выбрать из таблицы hr.employees информацию о сотрудниках,
+
+-- у которых  empid >= 2 и empid <= 6
+
+SELECT * FROM HR.Employees WHERE empid BETWEEN 2 AND 6
+
+SELECT * FROM HR.Employees WHERE empid >= 2 AND empid <= 6
+
+![image](https://github.com/user-attachments/assets/a83a7967-d17e-4ed4-ac87-4e939d3f9f57)
+
+Эти два запроса дают одинаковый результат
+
+#### --Выбрать из таблицы hr.employees информацию о сотрудниках,
+
+-- у которых  empid <= 3 и(или) empid >= 6
+
+SELECT * FROM HR.Employees WHERE empid <= 3 OR empid >= 6
+
+![image](https://github.com/user-attachments/assets/2cebce1c-e2e9-4b57-bc3b-8a0eb94abf0f)
+
+Чтобы задача имела решение, будем считать, что в задании или, а не и
+
+#### --Выбрать из таблицы hr.employees информацию о сотрудниках,
+
+-- у которых  empid >= 3 и empid <= 7 и empid <> 4
+
+SELECT * FROM HR.Employees WHERE empid >= 3 AND empid <= 7 AND empid <> 4
+
+SELECT * FROM HR.Employees WHERE empid BETWEEN 3 AND 7 AND empid <> 4
+
+![image](https://github.com/user-attachments/assets/0bb85ec0-8432-4d4b-9967-2b88b45af8aa)
+
+Эти два запроса дают одинаковый результат
+
+#### --Выбрать из таблицы hr.employees информацию о сотрудниках,
+
+-- у которых  empid >= 3 и empid <= 7 и empid <> 4 и(или) empid = 9
+
+SELECT * FROM HR.Employees WHERE empid >= 3 AND empid <= 7 AND empid <> 4 OR empid = 9
+
+SELECT * FROM HR.Employees WHERE empid BETWEEN 3 AND 7 AND empid <> 4 OR empid = 9
+
+![image](https://github.com/user-attachments/assets/4ac3b7ea-85b7-4f45-a877-1ba0c078c0ca)
+
+Эти два запроса дают одинаковый результат
+
+#### --Выбрать из таблицы hr.employees информацию о сотрудниках,
+
+--которые родились в 1971 году
+
+SELECT * FROM HR.Employees WHERE YEAR(birthdate) = 1971
+
+![image](https://github.com/user-attachments/assets/70b83dd0-92ff-4d23-b4b2-fe1b19e18cfd)
+
+Таких не нашлось
+
+#### --Выбрать из таблицы hr.employees информацию о сотрудниках,
+
+--которые родились в январе
+
+SELECT * FROM HR.Employees WHERE MONTH(birthdate) = 1
+
+![image](https://github.com/user-attachments/assets/ec56395c-2fc2-48c4-bdc9-c15f8da97047)
+
+А такие есть. MONTH позволяет извлечь из даты только месяц
+
+## 6_LIKE
+
+Пункты этого задания дублируют пункты Task 2
