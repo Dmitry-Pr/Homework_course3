@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/75d06d83-b38c-44c6-963c-2dd42ce818a3)# Practice 5 по базам данных
+# Practice 5 по базам данных
 
 ## Работу выполнил
 
