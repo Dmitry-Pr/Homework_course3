@@ -371,7 +371,7 @@ SELECT * FROM HR.Employees WHERE empid BETWEEN 3 AND 7 AND empid <> 4 OR empid =
 
 ![image](https://github.com/user-attachments/assets/4ac3b7ea-85b7-4f45-a877-1ba0c078c0ca)
 
-Эти два запроса дают одинаковый результат
+Эти два запроса дают одинаковый результат. Тоже есть смысл поменять и на или, иначе запрос некорректный.
 
 #### --Выбрать из таблицы hr.employees информацию о сотрудниках,
 
