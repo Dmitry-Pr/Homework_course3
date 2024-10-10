@@ -131,7 +131,7 @@ SELECT * FROM HR.Employees WHERE empid <= 3 OR empid >= 6;
 
 ![image](https://github.com/user-attachments/assets/bbdd9f04-881d-427b-ab2a-6e40c22f5aaf)
 
-Если строго по заданию, таких результатов не может существовать. Но если заменить и на или, то вот так получается.
+Если строго по заданию, таких результатов не может существовать. Но если заменить и на или, то вот так получается
 
 #### -- 14. Выбрать из таблицы Employees базы данных TSQL2012 всех сотрудников
 
@@ -144,3 +144,163 @@ SELECT * FROM HR.Employees WHERE empid >= 3 AND empid <= 7 AND empid <> 5;
 ![image](https://github.com/user-attachments/assets/b8c92b2f-6103-4311-9f75-9fe4bb63884e)
 
 Для этих двух зарпосов результат будет одинаковым
+
+### Task 2
+
+#### -- 1. Из базы данных TSQL 2012 из таблицы [Production].[Suppliers]
+
+-- показать  все записи, где поле region равно NULL
+
+SELECT * FROM Production.Suppliers WHERE region IS NULL;
+
+![image](https://github.com/user-attachments/assets/7a6c604a-2198-485b-b0df-f8a9812be589)
+
+Видно, что регион везде null
+
+#### -- 2. Из базы данных TSQL 2012 из таблицы [Production].[Suppliers]
+
+-- показать все записи где поле region не равно NULL
+
+SELECT * FROM Production.Suppliers WHERE region IS NOT NULL;
+
+![image](https://github.com/user-attachments/assets/6de741c9-495a-4c3a-8dc5-718154e62ccb)
+
+Видно, что регион везде не null
+
+#### -- 3. Найти все фамилии в таблице [HR].Employees базы данных TSQL 2012,
+
+-- состоящие из четырех букв (Указание - любая буква это подчеркивание)
+
+SELECT lastname FROM HR.Employees WHERE LEN(lastname) = 4;
+
+SELECT lastname FROM HR.Employees WHERE lastname LIKE N'____';
+
+![image](https://github.com/user-attachments/assets/aa3fc2b3-d42f-4ee8-a305-b07ab13603b7)
+
+Эти два запроса дают одинаковый результат
+
+#### -- 4. Найти все фамилии в таблице [HR].Employees базы данных TSQL 2012,
+
+-- начинающиеся с Ca(Ка).
+
+SELECT lastname FROM HR.Employees WHERE lastname LIKE N'Ка%';
+
+![image](https://github.com/user-attachments/assets/49f56a9f-4d53-46ce-b7d0-e8113ba8b8ba)
+
+Такая запись только одна 
+
+#### -- 5. Найти все фамилии в таблице [HR].Employees базы данных TSQL 2012,
+
+-- заканчивающиеся на ed(ед).
+
+SELECT lastname FROM HR.Employees WHERE lastname LIKE N'%ед';
+
+![image](https://github.com/user-attachments/assets/02947325-cf37-44ea-a845-581f2f502539)
+
+Такая тоже только одна
+
+#### -- 6. Найти все фамилии в таблице [HR].Employees базы данных TSQL 2012,
+
+-- содержащие ele(еле).
+
+SELECT lastname FROM HR.Employees WHERE lastname LIKE N'%еле%';
+
+![image](https://github.com/user-attachments/assets/f97f745e-fa3e-4624-ac4c-06afd2272349)
+
+Эта же фамилия подходит под условие
+
+#### -- 7. Найти все фамилии в таблице [HR].Employees базы данных TSQL 2012,
+
+-- которые не начинаются с букв ABCDE(АБВГД).
+
+SELECT lastname FROM HR.Employees WHERE lastname NOT LIKE N'[АБВГД]%';
+
+![image](https://github.com/user-attachments/assets/7fd807da-a502-4554-8ecd-2b64983a3dd4)
+
+Используем NOT в сочетании с LIKE, где указываем на какую буквку должно начаться слово
+
+#### -- 8
+
+CREATE TABLE Task
+(
+  orderid int,
+  price decimal(7,2)
+)
+
+INSERT INTO Task  (orderid, price) VALUES (1,1.5)
+
+INSERT INTO Task  (orderid, price) VALUES (2,2.5)
+
+INSERT INTO Task  (orderid, price) VALUES (3,20.5)
+
+INSERT INTO Task  (orderid, price) VALUES (4,2.5)
+
+INSERT INTO Task (orderid) VALUES (5);
+
+#### -- 8.0 Выбрать из таблицы Task значения price так, чтобы они не повторялись
+
+SELECT DISTINCT price FROM Task;
+
+![image](https://github.com/user-attachments/assets/ab3eb641-78eb-46e6-bc7a-399b4aa5efd1)
+
+Действительно все уникальные
+
+#### -- 8.1 Получить сумму значений в таблице task для поля price
+
+SELECT SUM(price) AS TotalPrice FROM Task;
+
+![image](https://github.com/user-attachments/assets/7d40b10a-2dd2-49a2-8b9a-635392810899)
+
+Получили сумму
+
+#### -- 8.2 Получить среднее значение в таблице task для поля price
+
+SELECT AVG(price) AS AveragePrice FROM Task;
+
+![image](https://github.com/user-attachments/assets/2c853510-8833-41b2-b7c2-58e7714f6ef9)
+
+Получили среднее
+
+#### -- 8.3 Выбрать все значения из таблицы task и отсортировать их по полю price в порядке убывания
+
+SELECT * FROM Task ORDER BY price DESC;
+
+![image](https://github.com/user-attachments/assets/deebf707-d60c-442a-85ec-9334576555eb)
+
+Действительно по убыванию
+
+#### -- 9. Подсчитать максимальное значение в таблице Sales.OrderDetails
+
+-- для выражения qty * unitprice *(1-discount) для orderid = 10250
+
+SELECT MAX(qty * unitprice * (1 - discount)) AS MaxValue
+
+FROM Sales.OrderDetails
+
+WHERE orderid = 10250;
+
+![image](https://github.com/user-attachments/assets/3babd786-40ad-45de-8ff9-de7fbc59aebb)
+
+Получаем максимальное значение
+
+#### -- 10. Для базы данных tsql2012 в таблице sales.orderdetails
+
+-- посчитать сумму значений qty для orderid = 10248
+
+SELECT SUM(qty) AS TotalQty FROM Sales.OrderDetails WHERE orderid = 10248;
+
+![image](https://github.com/user-attachments/assets/d198160e-1b9d-4217-898c-f375bbaaacd0)
+
+Вот сумма
+
+#### -- 11. Для таблицы hr.employees определить всех работников, которые родились
+
+-- в 1970 и 1973 годах
+
+SELECT * FROM HR.Employees WHERE YEAR(birthdate) IN (1970, 1973);
+
+SELECT * FROM HR.Employees WHERE YEAR(birthdate) = 1970 OR YEAR(birthdate) = 1973;
+
+![image](https://github.com/user-attachments/assets/aea5cde9-7a6a-4ab4-8c05-5a70d750519e)
+
+Эти два запроса дают одинаковый результат
