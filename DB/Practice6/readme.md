@@ -136,9 +136,20 @@ ADD CONSTRAINT FK__Events__Tools FOREIGN KEY (T_id) REFERENCES Tools(T_id);
 
 
 #### -- 7. Изменение типа колонки Number в таблице Events
+
+-- Сначала уберем значения по умолчанию и ограничения
+
+ALTER TABLE Events DROP CONSTRAINT df_number;
+
+ALTER TABLE Events DROP CONSTRAINT chk_number;
+
+-- Изменим тип
+
 ALTER TABLE Events
+
 ALTER COLUMN Number DECIMAL(5, 2);
 
+![image](https://github.com/user-attachments/assets/8ceeee3b-caff-419a-9169-3a16e32e1ec4)
 
-
+Видно, что значение поменялось
 
