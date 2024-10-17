@@ -211,3 +211,29 @@ INSERT INTO StudentSubject (st_id, s_id) VALUES (1, 1);
 ![image](https://github.com/user-attachments/assets/cd8c3868-1bf0-4947-90f6-94d7f8e6c083)
 
 ![image](https://github.com/user-attachments/assets/be3b300f-a95a-4b2f-b929-a6650c7ac60a)
+
+```
+-- Пример удаления данных
+DELETE FROM StudentSubject WHERE st_id = 1 AND s_id = 1;
+DELETE FROM Subjects WHERE s_id = 1;
+```
+
+![image](https://github.com/user-attachments/assets/c7f6c98c-a379-46a4-b79d-7ace0c6824d6)
+![image](https://github.com/user-attachments/assets/53be04cb-82cf-47e6-b584-c0a50bd16ae4)
+
+Все как обычно вставилось и удалилось, как надо
+
+```
+-- Зададим каскадное удаление для связанных записей
+ALTER TABLE students
+ADD CONSTRAINT students_gr_id_fkey
+FOREIGN KEY (gr_id) REFERENCES groups (gr_id)
+ON DELETE CASCADE;
+
+-- Теперь удаление группы будет автоматически удалять всех студентов, связанных с этой группой.
+
+DELETE FROM groups WHERE gr_id = 1;
+```
+
+![image](https://github.com/user-attachments/assets/742b4dd9-9b6f-4480-b3ad-7e5642efdd46)
+![image](https://github.com/user-attachments/assets/8f33876d-4576-4841-bfec-9f321b763f1b)
