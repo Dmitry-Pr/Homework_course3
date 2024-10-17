@@ -37,17 +37,37 @@ CREATE TABLE Events (
     Number INT
 );
 
+![image](https://github.com/user-attachments/assets/2d341ede-67f3-4ad8-b24a-b6fa42cb684a)
+
+
+Создаем таблицы из задания, с помощью Foreign key задаем внешние ключи в таблице Events
+
 -- 2. Проверить вставку и удаление записей в таблицы
 -- Events, Operations и Workers при наличии ограничений по
 -- ссылочной целостности (наличия FOREIGN KEY) и без
 -- ограничения по ссылочной целостности.
 
 INSERT INTO Workers (W_id, lastname, firstname) VALUES (1, 'Ivanov', 'Ivan');
+
 INSERT INTO Operations (Op_id, opname, cost) VALUES (1, 'Operation A', 100.00);
+
 INSERT INTO Events (Ev_id, W_id, Op_id, [Date], Number) VALUES (1, 1, 1, '2024-01-01', 10);
+
+![image](https://github.com/user-attachments/assets/f4dfd934-6d85-40f5-8ee7-27396c8bf55f)
+
+
+![image](https://github.com/user-attachments/assets/fdec0f39-12e4-4d5c-b669-56555b5c3557)
+
+![image](https://github.com/user-attachments/assets/a7dc686c-b70b-452d-92f7-67165a953b77)
+
+Вставили значения, все появилось в таблицах
 
 -- Попробуем удалить запись из Workers, что вызовет ошибку, так как запись используется в Events
 DELETE FROM Workers WHERE W_id = 1;  -- Это вызовет ошибку из-за FOREIGN KEY
+
+![image](https://github.com/user-attachments/assets/53a8f7ac-349f-4a52-8926-75883c24e560)
+
+
 
 -- Удалим ограничения ссылочной целостности и повторим удаление без них
 ALTER TABLE Events NOCHECK CONSTRAINT FK__Events__W_id__4222D4EF;
