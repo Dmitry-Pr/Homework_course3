@@ -153,3 +153,61 @@ ALTER COLUMN Number DECIMAL(5, 2);
 
 Видно, что значение поменялось
 
+## Task 2
+
+```
+-- Создание таблиц groups и students
+CREATE TABLE groups
+(
+  gr_id INT PRIMARY KEY,
+  groupname VARCHAR(30)
+);
+
+CREATE TABLE students
+(
+  st_id INT PRIMARY KEY,
+  gr_id INT,
+  lastname VARCHAR(30),
+  firstname VARCHAR(30),
+  ticketnumber INT,
+  FOREIGN KEY (gr_id) REFERENCES groups (gr_id)
+);
+
+-- Создание таблиц Subjects и StudentSubject
+CREATE TABLE Subjects
+(
+  s_id INT PRIMARY KEY,
+  subjectname VARCHAR(50)
+);
+
+CREATE TABLE StudentSubject
+(
+  st_id INT,
+  s_id INT,
+  PRIMARY KEY (st_id, s_id),
+  FOREIGN KEY (st_id) REFERENCES students (st_id),
+  FOREIGN KEY (s_id) REFERENCES Subjects (s_id)
+);
+```
+
+![image](https://github.com/user-attachments/assets/739c9077-478b-431e-89f1-1148d3eab99a)
+
+Создалось 4 таблички
+
+```
+-- Пример вставки данных
+INSERT INTO groups (gr_id, groupname) VALUES (1, 'Group A');
+INSERT INTO students (st_id, gr_id, lastname, firstname, ticketnumber)
+VALUES (1, 1, 'Smith', 'John', 12345);
+
+INSERT INTO Subjects (s_id, subjectname) VALUES (1, 'Math');
+INSERT INTO StudentSubject (st_id, s_id) VALUES (1, 1);
+```
+
+![image](https://github.com/user-attachments/assets/922e7de9-1d38-45b2-a5f3-360f4d9521a3)
+
+![image](https://github.com/user-attachments/assets/4c526fa2-5ee8-480c-9558-e4ddd1516099)
+
+![image](https://github.com/user-attachments/assets/cd8c3868-1bf0-4947-90f6-94d7f8e6c083)
+
+![image](https://github.com/user-attachments/assets/be3b300f-a95a-4b2f-b929-a6650c7ac60a)
