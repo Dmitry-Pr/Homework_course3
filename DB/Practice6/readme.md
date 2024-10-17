@@ -237,3 +237,5 @@ DELETE FROM groups WHERE gr_id = 1;
 
 ![image](https://github.com/user-attachments/assets/742b4dd9-9b6f-4480-b3ad-7e5642efdd46)
 ![image](https://github.com/user-attachments/assets/8f33876d-4576-4841-bfec-9f321b763f1b)
+
+Студент, связанный с этой группой тоже удалился
