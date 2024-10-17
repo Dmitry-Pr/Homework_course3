@@ -9,7 +9,7 @@
 
 ## Task 1 (из файла)
 
---1 Создать таблицы Workers , Events и Operations в соответствии с ER
+#### --1 Создать таблицы Workers , Events и Operations в соответствии с ER
 -- диаграммой. Соответственно создаются первичные и внешние ключи
 -- W_id - первичный ключ для Workers  , Op_id первичный ключ для
 -- Operations, Ev_id первичный ключ для Events.
@@ -39,12 +39,14 @@ CREATE TABLE Events (
 
 ![image](https://github.com/user-attachments/assets/2d341ede-67f3-4ad8-b24a-b6fa42cb684a)
 
-
 Создаем таблицы из задания, с помощью Foreign key задаем внешние ключи в таблице Events
 
--- 2. Проверить вставку и удаление записей в таблицы
+#### -- 2. Проверить вставку и удаление записей в таблицы
+
 -- Events, Operations и Workers при наличии ограничений по
+
 -- ссылочной целостности (наличия FOREIGN KEY) и без
+
 -- ограничения по ссылочной целостности.
 
 INSERT INTO Workers (W_id, lastname, firstname) VALUES (1, 'Ivanov', 'Ivan');
@@ -63,47 +65,77 @@ INSERT INTO Events (Ev_id, W_id, Op_id, [Date], Number) VALUES (1, 1, 1, '2024-0
 Вставили значения, все появилось в таблицах
 
 -- Попробуем удалить запись из Workers, что вызовет ошибку, так как запись используется в Events
+
 DELETE FROM Workers WHERE W_id = 1;  -- Это вызовет ошибку из-за FOREIGN KEY
 
 ![image](https://github.com/user-attachments/assets/53a8f7ac-349f-4a52-8926-75883c24e560)
 
+-- Удалим ограничение ссылочной целостности и повторим удаление без них
 
-
--- Удалим ограничения ссылочной целостности и повторим удаление без них
-ALTER TABLE Events NOCHECK CONSTRAINT FK__Events__W_id__4222D4EF;
+ALTER TABLE Events NOCHECK CONSTRAINT FK__Events__W_id__4D94879B;
 
 -- Теперь можно удалить запись без ошибок
+
 DELETE FROM Workers WHERE W_id = 1;
 
--- Вернем ограничения
-ALTER TABLE Events CHECK CONSTRAINT FK__Events__W_id__4222D4EF;
+![image](https://github.com/user-attachments/assets/e00e527b-af12-4a7d-928f-740f57fc2948)
 
--- 3. Создать ограничения для поля Number в таблице Events
+Убрали ограничение и получилось удалить
+
+-- Вернем ограничение
+
+ALTER TABLE Events CHECK CONSTRAINT FK__Events__W_id__4D94879B;
+
+#### -- 3. Создать ограничения для поля Number в таблице Events
+
 -- как Check , больше нуля и меньше 300 и как default(20)
+
 ALTER TABLE Events
+
 ADD CONSTRAINT chk_number CHECK (Number > 0 AND Number < 300);
 
 ALTER TABLE Events
+
 ADD CONSTRAINT df_number DEFAULT 20 FOR Number;
 
--- 4. Создать таблицы и ограничения при помощи дизайнера
+![image](https://github.com/user-attachments/assets/fc43ec43-80fe-4274-8588-b818da267c0a)
+
+Видим, что создалось одно дефолтное значение и одна проверка
+
+#### -- 4. Создать таблицы и ограничения при помощи дизайнера
+
 -- Создали таблицу Tools
 
 ![image](https://github.com/user-attachments/assets/3ca2b735-9999-406f-99b1-7c862f7863d1)
 
--- 5. Добавить поле в таблицу Workers
+#### -- 5. Добавить поле в таблицу Workers
+
 ALTER TABLE Workers
+
 ADD birthdate DATE;
 
--- 6. Добавить внешний ключ в таблицу Events
+![image](https://github.com/user-attachments/assets/0dde45ca-922c-4e7a-a4fa-770167891263)
+
+Поле появилось
+
+#### -- 6. Добавить внешний ключ в таблицу Events
+
+-- Создадим сначала поле
 
 ALTER TABLE Events
+
 ADD T_id INT;
 
+-- Добавим внешний ключ
+
 ALTER TABLE Events
+
 ADD CONSTRAINT FK__Events__Tools FOREIGN KEY (T_id) REFERENCES Tools(T_id);
 
--- 7. Изменение типа колонки Number в таблице Events
+![image](https://github.com/user-attachments/assets/739d74a9-b53f-482a-8ca8-6c39f508bc9f)
+
+
+#### -- 7. Изменение типа колонки Number в таблице Events
 ALTER TABLE Events
 ALTER COLUMN Number DECIMAL(5, 2);
 
