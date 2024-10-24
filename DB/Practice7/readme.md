@@ -123,6 +123,9 @@ FROM groups g
 LEFT JOIN students s ON g.gr_id = s.gr_id
 WHERE s.gr_id IS NULL;
 ```
+![image](https://github.com/user-attachments/assets/ca1c1988-e912-4acf-bb14-d9fe3ba31a14)
+
+Таких нет
 
 ```
 CREATE TABLE Authors
@@ -153,6 +156,10 @@ SELECT a.au_lastname, b.b_name
 FROM Authors a
 JOIN books b ON a.au_id = b.au_id;
 ```
+
+![image](https://github.com/user-attachments/assets/467efb96-7def-44bb-ab11-ca19af43452b)
+
+Объединил и вывел
 
 ```
 CREATE TABLE [dbo].Classik
@@ -192,14 +199,21 @@ FROM [dbo].Classik c
 JOIN [dbo].Phrases p ON c.classik_id = p.classik_id;
 ```
 
+![image](https://github.com/user-attachments/assets/5a7ed08b-0d11-4835-b988-938a8cc1908c)
+
+Все по заданию
 
 #### --4. Вывести на экран при джойне двух таблиц Classik и Phrases крылатые выражения Горбачева
 ```
 SELECT p.phrase
 FROM [dbo].Classik c
 JOIN [dbo].Phrases p ON c.classik_id = p.classik_id
-WHERE c.firstname = 'Михаил' AND c.lastname = 'Горбачев';
+WHERE c.lastname = 'Горбачев';
 ```
+
+![image](https://github.com/user-attachments/assets/fa2f4233-9111-4d5c-899f-694b2b48c592)
+
+Все так же, поиск по фамилии
 
 #### --5. Вывести на экран при соединении двух таблиц из задачи 2
 --   выражения Горбачева и Зайцева
@@ -207,9 +221,13 @@ WHERE c.firstname = 'Михаил' AND c.lastname = 'Горбачев';
 SELECT p.phrase
 FROM [dbo].Classik c
 JOIN [dbo].Phrases p ON c.classik_id = p.classik_id
-WHERE (c.firstname = 'Михаил' AND c.lastname = 'Горбачев')
-OR (c.firstname = 'Генерал' AND c.lastname = 'Зайцев');
+WHERE c.lastname = 'Горбачев'
+OR c.lastname = 'Зайцев';
 ```
+
+![image](https://github.com/user-attachments/assets/74cc890c-4248-4734-8c8b-49a7f73d4623)
+
+Все так же
 
 ```
 CREATE TABLE cities
@@ -279,6 +297,10 @@ FROM cities ci
 JOIN regions r ON ci.city_id = r.city_id;
 ```
 
+![image](https://github.com/user-attachments/assets/d2ede433-48de-4008-ae74-2f2255da45f7)
+
+Вывел все
+
 #### --7. Вывести на экран запрос предыдущей задачи  для города Тьматаракань
 ```
 SELECT ci.*, r.*
@@ -286,6 +308,10 @@ FROM cities ci
 JOIN regions r ON ci.city_id = r.city_id
 WHERE ci.city_name = 'Тьма Таракань';
 ```
+
+![image](https://github.com/user-attachments/assets/761e38c2-f807-4e32-81d1-4bb713105f9f)
+
+Только Тьматаракань
 
 #### -- 8. Объединить при помощи JOIN две таблицы regions и streets
 --   и вывести район и его улицу, для района в котором
@@ -297,6 +323,10 @@ JOIN streets s ON r.region_id = s.region_id
 WHERE s.street_name LIKE '%спартак чемпион%';
 ```
 
+![image](https://github.com/user-attachments/assets/b406dfd9-834a-410c-9f6a-7dac9cc4cae5)
+
+Поиск по Like с %%
+
 #### -- 9. Вывести значение города , его района и улицу , для города
 --    района и улицы, где есть выражение в названии улицы похожее на "даешь ля"
 ```
@@ -306,6 +336,10 @@ JOIN regions r ON ci.city_id = r.city_id
 JOIN streets s ON r.region_id = s.region_id
 WHERE s.street_name LIKE '%даешь ля%';
 ```
+
+![image](https://github.com/user-attachments/assets/0d768b21-e5db-4a14-876b-ece2ff3695a8)
+
+Два Join, поиск так же
 
 #### -- 10. Вывести значение города , его района и улицу , для города
 --    района и улицы, где есть выражение в названии улицы похожее на "ЗАГС"
@@ -317,13 +351,21 @@ JOIN streets s ON r.region_id = s.region_id
 WHERE s.street_name LIKE '%ЗАГС%';
 ```
 
+![image](https://github.com/user-attachments/assets/0fcd3879-e6b4-4027-85c9-6814d0ecbaf9)
+
+Все то же самое
+
 #### --11. Подсчитать сумму для поля qty таблицы Sales.OrderDetails
 --    базы данных TSQL2012
 ```
-USE TSQL2012
+USE TSQL2012;
 SELECT SUM(qty) AS total_qty
 FROM Sales.OrderDetails;
 ```
+
+![image](https://github.com/user-attachments/assets/40b11a97-7398-40ef-ae15-c4b9a2d078e8)
+
+Переключились и посчитали сумму
 
 #### -- 12. Определить записи со стоимостью , подсчитанную в таблице
 --    sales.orderdetails больше чем 50.5
@@ -333,6 +375,10 @@ FROM Sales.OrderDetails
 WHERE qty * unitprice * (1 - discount) > 50.5;
 ```
 
+![image](https://github.com/user-attachments/assets/ec75ad3e-f290-4671-b9f7-cc141efce8e1)
+
+Весь результат не влезет в скриншот, но решение обычное
+
 #### -- 13. Подсчитать среднее выражение для произведения qty * unitprice *(1-discount) в
 --    таблице Sales.OrderDetails для сотрудника по фамилии Peled (база tsql2012)
 --    Указание: Сделать JOIN таблицы Sales.Orders Sales.OrderDetails HR.Employees
@@ -341,8 +387,12 @@ SELECT AVG(qty * unitprice * (1 - discount)) AS avg_value
 FROM Sales.OrderDetails od
 JOIN Sales.Orders o ON od.orderid = o.orderid
 JOIN HR.Employees e ON o.empid = e.empid
-WHERE e.lastname = 'Peled';
+WHERE e.lastname = N'Пелед';
 ```
+
+![image](https://github.com/user-attachments/assets/d206e766-88b1-4281-a832-7d28d0252393)
+
+Два Join + AVG для подсчета среднего
 
 #### -- 14. Найти максимальное значение выражения qty * unitprice *(1-discount)
 --    в таблице Sales.OrderDetails для клиента у которого contactname = "Ray, Mike"(база tsql2012)
@@ -356,6 +406,10 @@ JOIN Sales.Customers c ON o.custid = c.custid
 WHERE c.contactname = 'Ray, Mike';
 ```
 
+![image](https://github.com/user-attachments/assets/dbd9f266-c94e-48e2-b765-35838342a0a1)
+
+Опять два Join + Max для поиска максимума
+
 #### -- 15. Определить по таблицам sales.customers и sales.orders заказчиков,
 -- которые не сделали ни одного заказа(использовать LEFT JOIN)
 ```
@@ -365,6 +419,10 @@ LEFT JOIN Sales.Orders o ON c.custid = o.custid
 WHERE o.orderid IS NULL;
 ```
 
+![image](https://github.com/user-attachments/assets/9ab4ddd8-7c5b-44e3-a0f2-129dee7e0ab5)
+
+Все по заданию
+
 #### -- 16. Вывести информацию о сотрудниках и их заказах из таблиц hr.employees и
 -- sales.orders при помощи JOIN (вывести lastname, firstname, orderdate)
 ```
@@ -372,6 +430,10 @@ SELECT e.lastname, e.firstname, o.orderdate
 FROM HR.Employees e
 JOIN Sales.Orders o ON e.empid = o.empid;
 ```
+
+![image](https://github.com/user-attachments/assets/578961d9-a3d6-4549-b890-9120fbcedfa3)
+
+Записей слишком много, но запрос простой
 
 #### -- 17. Вывести информацию о клиентах и их заказах из таблиц sales.customers и
 -- sales.orders при помощи JOIN (вывести contactname, orderdate)
@@ -381,3 +443,6 @@ FROM Sales.Customers c
 JOIN Sales.Orders o ON c.custid = o.custid;
 ```
 
+![image](https://github.com/user-attachments/assets/6afd7add-caa3-40ec-85c5-f8ab23bf82ca)
+
+Все по заданию, данных слишком много для скриншота
