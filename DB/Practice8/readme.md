@@ -265,6 +265,8 @@ GROUP BY f.FirmId, f.FirmName
 ORDER BY f.FirmId;
 ```
 
+![image](https://github.com/user-attachments/assets/b42043da-97d6-4715-8b50-b6820451f695)
+
 ### -- 2. Вывести сумму произведения qty*unitprice*(1-discount) из таблицы
 -- sales.orderdetails для каждого работника. Вывести фамилию , имя
 -- и сумму. (Не забывать что работники находятcя в таблице hr.employees
@@ -285,6 +287,8 @@ ORDER BY e.lastname, e.firstname;
 -- в одну группу много сотрудников, у которых совпадают фамилии.
 ```
 
+![image](https://github.com/user-attachments/assets/668f1853-dc8e-4960-b716-f52b1cf3d002)
+
 ### -- 3. Упражнение аналогичное предыдущему, только уже данные
 --    вычисляются не для сотрудника а для клиента
 --    Вывести сумму произведения qty*unitprice*(1-discount) из таблицы
@@ -301,6 +305,9 @@ JOIN sales.customers AS c ON o.custid = c.custid
 GROUP BY c.contactname, c.custid
 ORDER BY c.contactname;
 ```
+
+![image](https://github.com/user-attachments/assets/4d04e73b-920a-4719-82b0-e90743c09587)
+
 ### -- 4. Вывести сумму произведения qty*unitprice*(1-discount) из таблицы
 -- sales.orderdetails для каждого заказа. Вывести еще номер заказа
 -- и дату заказа
@@ -312,6 +319,9 @@ JOIN sales.orders AS o ON od.orderid = o.orderid
 GROUP BY o.orderid, o.orderdate
 ORDER BY o.orderid;
 ```
+
+![image](https://github.com/user-attachments/assets/3daa8aa1-8072-4956-b3ff-2171ecb981e6)
+
 ### -- 5. Вывести сумму произведения qty*unitprice*(1-discount)
 -- из таблицы sales.orderdetails для каждого года, месяца и дня заказа.
 -- выводить в запросе qty*unitprice*(1-discount), год, месяц и день
@@ -325,6 +335,9 @@ JOIN sales.orders AS o ON od.orderid = o.orderid
 GROUP BY YEAR(o.orderdate), MONTH(o.orderdate), DAY(o.orderdate)
 ORDER BY OrderYear, OrderMonth, OrderDay;
 ```
+
+![image](https://github.com/user-attachments/assets/d898b16c-a1c5-46ab-8c7e-fda582f9e918)
+
 
 ```
 USE testdatabase;
@@ -391,6 +404,7 @@ GROUP BY g.gr_id, g.GroupName
 ORDER BY g.gr_id;
 ```
 
+![image](https://github.com/user-attachments/assets/b58a729f-92fe-486a-9c5a-14b8d8ec5204)
 
 
 
