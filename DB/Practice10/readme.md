@@ -8,7 +8,7 @@
 Для работы поднял образ mssql в докере и запросы писал в PyCharm (там же подключился к бд)
 
 ## Task1611
-
+```
 CREATE TABLE exam
 (
     ID       INT,
@@ -36,7 +36,7 @@ INSERT INTO exam (ID, [name], class, points, subjects)
 VALUES (19, 'Егор', 'ФМ', 179, 'Информатика')
 INSERT INTO exam (ID, [name], class, points, subjects)
 VALUES (20, 'Арсений', 'ФМ', 179, 'Математика')
-
+```
 
 ### -- 1. Ранжировать учеников по баллам всех экзаменов испльзуя функцию DENDE_RANK()
 ```
