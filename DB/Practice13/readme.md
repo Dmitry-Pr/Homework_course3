@@ -76,7 +76,7 @@ CREATE TABLE dbo.Products
     SupplierID   INT,
     CategoryID   INT,
     UnitPrice    DECIMAL(10, 2),
-    UnitsInStock INT
+    Discontinued BIT
 );
 
 INSERT INTO dbo.Categories
@@ -88,7 +88,8 @@ SELECT *
 FROM tsql2012.Production.Products;
 ```
 ![image](https://github.com/user-attachments/assets/b217fca1-f2f5-4832-9c8f-059e6b1b792b)
-![image](https://github.com/user-attachments/assets/a4f77c4d-695c-4c0d-9037-71e591ab6b3c)
+![image](https://github.com/user-attachments/assets/54e62199-d1e1-4809-a2ca-68eb08944a9c)
+
 
 ### -- Для следующих четырех задач требуется создать таблицы orders orderdetails employees
 -- копированием таблиц из базы данных tsql2012 tsql2012.sales.orders tsql2012.sales.orderdetails
@@ -129,6 +130,9 @@ FROM dbo.orderdetails od
          JOIN dbo.employees e ON e.empid = o.empid
 WHERE e.lastname = N'Пелед';
 ```
+![image](https://github.com/user-attachments/assets/bccc8352-0dfc-4e1a-a995-331eadfa5d41)
+![image](https://github.com/user-attachments/assets/64415115-53cc-487e-ab3d-f4c70e45303e)
+
 
 ### -- 3. Обновить цену unitprice в таблице orderdetails для работника по фамилии Пелед
 -- Увеличить ее на 20% при помощи коррелированного подзапроса  с участием таблицм
@@ -140,6 +144,7 @@ WHERE orderid IN (SELECT o.orderid
                   FROM dbo.orders o
                   WHERE o.empid = (SELECT e.empid FROM dbo.employees e WHERE e.lastname = N'Пелед'));
 ```
+![image](https://github.com/user-attachments/assets/91d09faa-fa10-46a5-a68e-33e97894f50b)
 
 ### -- 4. Удалить записи в таблице orderdetails для работника по фамилии Пелед
 --    при помощи соединения(JOIN) с таблицами employees и orders
@@ -150,6 +155,8 @@ FROM dbo.orderdetails od
          JOIN dbo.employees e ON e.empid = o.empid
 WHERE e.lastname = N'Пелед';
 ```
+![image](https://github.com/user-attachments/assets/68a8556f-ad5d-434f-a9ee-5647144d38a0)
+
 ### -- 5. Удалить записи в таблице orderdetails для работника по фамилии Пелед
 --    при помощи коррелированного подзапроса и таблиц  employees и orders
 ```
@@ -159,6 +166,7 @@ WHERE orderid IN (SELECT o.orderid
                   FROM dbo.orders o
                   WHERE o.empid = (SELECT e.empid FROM dbo.employees e WHERE e.lastname = N'Пелед'));
 ```
+![image](https://github.com/user-attachments/assets/b58b787e-dc46-4071-935b-204fdf4947dd)
 
 ### -- 6. Создать таблицу test
 
@@ -190,6 +198,7 @@ WHERE ID IN (SELECT ID
              FROM CTE
              WHERE RowNum > 1);
 ```
+![image](https://github.com/user-attachments/assets/f5f7d36f-1b01-46e8-ad23-05498b0de7e0)
 
 ### -- 7. Создать таблицу test и testex следующим способом
 ```
@@ -238,11 +247,14 @@ WHEN NOT MATCHED THEN
     INSERT (ID, LastName, FirstName)
     VALUES (Source.ID, Source.LastName, Source.FirstName);
 ```
+![image](https://github.com/user-attachments/assets/9371038c-5652-49d3-acdf-00d30417d69d)
 
 ### -- 8. Объединить таблицы Categories и Products при помощи JOIN по полю
 -- categoryid. Создать по данному запросу представление View с именем v1
 -- и вывести все поля представления на экран
 ```
+DROP VIEW IF EXISTS dbo.v1;
+
 CREATE VIEW dbo.v1 AS
 SELECT
     p.ProductID,
@@ -254,6 +266,7 @@ JOIN dbo.Categories c ON p.CategoryID = c.CategoryID;
 
 SELECT * FROM dbo.v1;
 ```
+![image](https://github.com/user-attachments/assets/e0f36839-6103-4c3b-832d-abbfa6692bcb)
 
 ### --9. Определить для каждого работника суммарную стоимость заказа
 -- unitprice*qty*(1-discount) за каждый год для таблиц orderdetails, orders, employees .
@@ -262,6 +275,8 @@ SELECT * FROM dbo.v1;
 -- подзапроса с таблицей employees и созданием из данного
 -- подзапроса представления(view).
 ```
+DROP VIEW IF EXISTS dbo.EmployeeOrderSummary;
+
 CREATE VIEW dbo.EmployeeOrderSummary AS
 SELECT
     e.LastName,
@@ -275,3 +290,4 @@ GROUP BY e.LastName, e.FirstName, YEAR(o.orderdate);
 
 SELECT * FROM dbo.EmployeeOrderSummary;
 ```
+![image](https://github.com/user-attachments/assets/4e71f98c-6edc-4f95-9c52-93468903a4ce)
