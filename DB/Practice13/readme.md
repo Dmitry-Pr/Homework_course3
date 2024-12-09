@@ -32,6 +32,8 @@ SELECT *
 INTO dbo.Products
 FROM (SELECT * FROM tsql2012.Production.Products) AS SubQuery;
 ```
+![image](https://github.com/user-attachments/assets/88c75466-a7a5-4e31-aad3-346005775f20)
+![image](https://github.com/user-attachments/assets/4c17bf32-985c-49c5-b382-24f71ecedb4c)
 
 ### -- b)
 ```
@@ -49,6 +51,8 @@ SELECT *
 INTO dbo.Products
 FROM tsql2012.Production.Products;
 ```
+![image](https://github.com/user-attachments/assets/956b0ea0-3f18-4138-ac18-c38bc5bda201)
+![image](https://github.com/user-attachments/assets/3d879288-49b7-44ac-97ca-a0db7ed42807)
 
 ### --c)
 ```
@@ -83,6 +87,9 @@ INSERT INTO dbo.Products
 SELECT *
 FROM tsql2012.Production.Products;
 ```
+![image](https://github.com/user-attachments/assets/b217fca1-f2f5-4832-9c8f-059e6b1b792b)
+![image](https://github.com/user-attachments/assets/a4f77c4d-695c-4c0d-9037-71e591ab6b3c)
+
 ### -- Для следующих четырех задач требуется создать таблицы orders orderdetails employees
 -- копированием таблиц из базы данных tsql2012 tsql2012.sales.orders tsql2012.sales.orderdetails
 -- и tsql2012.hr.employees
